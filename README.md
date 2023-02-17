@@ -5,5 +5,5 @@ Package que j'ai créé pour m'aider lors de mes créations d'applications mobil
 
 Ce package contient deux dossiers :
 
-• helper : regroupe des classes visant à aider le développeur.
+• helper : regroupe des classes visant à aider le développeur.  
 • helper_extension : regroupe des extensions (String, Map, int...) visant encore une fois à aider le développeur.
