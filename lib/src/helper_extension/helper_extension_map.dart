@@ -13,12 +13,13 @@ extension HelperExtensionMap<K, V> on Map<K, V> {
     String mapEncoded;
     // If the type of values is String
     if(V == String) {
-      // Encoded the map
+      // Encode the map
       mapEncoded = json.encode(this);
     }
     // If the type of values is dynamic
     else{
-      // Encoded the map
+      // Cast all values in String
+      // and encode the map
       mapEncoded = json.encode(castAllValuesInString());
     }
     return mapEncoded;
