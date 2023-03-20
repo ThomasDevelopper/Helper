@@ -35,7 +35,7 @@ extension HelperExtensionMap<K, V> on Map<K, V> {
   ///   'idUser': 1,
   ///   'reviewUser': 4.85
   ///   'pseudoUser': "Toto"
-  /// }
+  /// };
   ///
   /// Map<String, String> newMap = map.castAllValuesInString();
   ///
