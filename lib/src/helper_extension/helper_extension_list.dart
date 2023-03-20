@@ -80,7 +80,7 @@ extension HelperExtensionList<E> on List<E> {
     insert(index, newElement);
   }
 
-  /// Function to a element of the list
+  /// Function to substitute a element of the list
   /// by the element of [newList] when [test] return true.
   void substituteItems({
     required List<E> newList,
