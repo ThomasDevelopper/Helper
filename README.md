@@ -14,29 +14,29 @@ and the Flutter guide for
 Ce package a été créé pour faciliter le développement de mes applications,
 ainsi que pour montrer une petite démo de ma façon de programmer.
 
-Malgré que toutes les extensions/classes ont été codé par moi seul, 
-pour helper_review.dart j'utilise le package in_app_review (présent sur pub.dev).
+Malgré que toutes les classes/extensions ont été codé par moi seul, 
+pour `lib/src/helper/helper_review.dart` j'utilise le package `in_app_review` (présent sur pub.dev).
 
-## Features
+## Contenu
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+Ce package comporte deux grands dossiers :
 
-## Getting started
+• `lib/src/helper` : dans ce dossier on retrouve des classes/instances 
+assez simples qui m'ont servis dans pas mal d'applications. 
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
-
-## Usage
-
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
+• `lib/src/helper_extension` : dans ce dossier on retrouve pas mal des extensions les plus utiles.
+Comme le fait de supprimer tout les espaces inutiles d'une chaîne de caractères :
 
 ```dart
-const like = 'sample';
+String email = " voiciMonEmail@gmail.com ".removeEmptySpaces(); // Ce qui donnera "voiciMonEmail@gmail.com".
 ```
 
-## Additional information
+## Tests unitaires
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Au début réticent aux tests unitaires, je me suis rendu à l'évidence que ceux-ci pouvait
+certes, nous faire perdre du temps pendant le développement, mais nous faire gagner
+un temps inestimable de débogage par la suite.
+
+C'est pourquoi la plupart de mes applications excédent largement les 100 tests unitaires. 
+
+Dans ce package vous retrouverez les tests dans le dossier `/test`
