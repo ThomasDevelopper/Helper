@@ -21,7 +21,7 @@ extension HelperExtensionString on String {
   /// ```dart
   /// '   This is    a test of the function    '.removeEmptySpaces(); // 'This is a test of the function'
   /// ```
-  String removeEmptySpaces() {
+  String removeUnnecessarySpaces() {
     // Initialize a String
     String finalString = "";
     // Initialize the boolean firstLetterIsFound to false

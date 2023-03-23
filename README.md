@@ -28,7 +28,7 @@ assez simples qui m'ont servis dans pas mal d'applications.
 Comme le fait de supprimer tout les espaces inutiles d'une chaîne de caractères :
 
 ```dart
-String email = " voiciMonEmail@gmail.com ".removeEmptySpaces(); // Ce qui donnera "voiciMonEmail@gmail.com".
+String email = " voiciMonEmail@gmail.com ".removeUnnecessarySpaces(); // Ce qui donnera "voiciMonEmail@gmail.com".
 ```
 
 ## Tests unitaires

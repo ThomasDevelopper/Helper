@@ -3,11 +3,11 @@ import 'package:helper/src/helper_extension/helper_extension_string.dart';
 
 void main()
 {
-  test("Test the function to remove all spaces empty", () {
+  test("Test the function to remove all unnecessary spaces", () {
     // All expectations
-    expect(" Test      the functionality of the function       ".removeEmptySpaces(), "Test the functionality of the function");
-    expect("Test the functionality      of the function".removeEmptySpaces(), "Test the functionality of the function");
-    expect("Final test".removeEmptySpaces(), "Final test");
+    expect(" Test      the functionality of the function       ".removeUnnecessarySpaces(), "Test the functionality of the function");
+    expect("Test the functionality      of the function".removeUnnecessarySpaces(), "Test the functionality of the function");
+    expect("Final test".removeUnnecessarySpaces(), "Final test");
   });
 
   test("Test the function removeLastCharIfSpace", () {
