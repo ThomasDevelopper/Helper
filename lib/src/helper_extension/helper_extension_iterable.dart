@@ -40,4 +40,15 @@ extension HelperExtensionIterable<E> on Iterable<E> {
     // Return the element if exist
     return element;
   }
+
+  /// Function to check if the list contains only [element].
+  bool containsOnly(E element) {
+    // For each item in the list
+    for(var item in this){
+      // If the item is different than the element
+      // Return false
+      if(item != element) return false;
+    }
+    return true;
+  }
 }
