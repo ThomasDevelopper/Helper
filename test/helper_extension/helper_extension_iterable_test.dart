@@ -57,4 +57,22 @@ void main()
       expect(() => list.singleWhereOrNull((element) => element.idModel==1), throwsStateError);
     });
   });
+
+
+  
+  group("Test containsOnly function", () {
+    test("Test a list of strings (full spaces)", () {
+      // Initialize a list
+      List<String> list = [" ", " ", " ", " ", " ", " "];
+      // Expect
+      expect(list.containsOnly(" "), true);
+    });
+
+    test("Test a list of different strings", () {
+      // Initialize a list
+      List<String> list = ["ab", " ", " ", "j", " ", "l"];
+      // Expect
+      expect(list.containsOnly(" "), false);
+    });
+  });
 }
