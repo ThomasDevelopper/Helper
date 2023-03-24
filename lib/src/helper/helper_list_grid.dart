@@ -3,12 +3,12 @@ library helper;
 import 'package:flutter/material.dart';
 
 /// Abstract class to help the developer to display a list or a grid.
-abstract class HelperListGrid {
+abstract class HelperListGrid<E> {
 
   /// Context
   BuildContext context;
   /// List of data to show in the list/grid.
-  List<dynamic>? data;
+  List<E>? _data;
   /// String show when [data] is empty.
   String emptyString;
   /// IconData show when [data] is empty.
@@ -16,43 +16,65 @@ abstract class HelperListGrid {
   /// String show when [data] is null.
   String errorString;
   /// Margin of the content. (only marginTop / marginBottom)
-  EdgeInsets? contentPadding;
+  EdgeInsets? _contentPadding;
 
   HelperListGrid({
     required this.context,
-    required this.data,
     required this.emptyString,
     required this.emptyIcon,
     required this.errorString
   });
+
+  /// Function to initialize [_data] with [data]
+  /// and [_contentPadding] with [contentPadding].
+  void _initialize(List<E>? data, EdgeInsets? contentPadding) {
+    this._data = data;
+    this._contentPadding = contentPadding;
+  }
 
   /// Display a list of elements.
   ///
   /// - [contentPadding] is the padding between the content of the list.
   /// - if [horizontal] is true, then the direction of the ListView is set to horizontal.
   Widget displayList({
+    required List<E>? data,
     EdgeInsets? contentPadding,
     bool horizontal = false
-  }) => _display(child: _showListView(horizontal), contentPadding: contentPadding);
+  }) {
+    // Initialization
+    _initialize(data, contentPadding);
+    // Return the list
+    return _display(
+        data: data,
+        child: _showListView(horizontal),
+        contentPadding: contentPadding);
+  }
 
   /// Display a grid of elements.
   Widget displayGrid({
+    required List<E>? data,
     double itemHeight = 2,
-    double itemWidth = 1
-  }) => _display(
-      child: _showGridView(itemHeight: itemHeight, itemWidth: itemWidth)
-  );
+    double itemWidth = 1,
+    EdgeInsets? contentPadding,
+  }) {
+    // Initialization
+    _initialize(data, contentPadding);
+    // Return the grid
+    return _display(
+        data: data,
+        child: _showGridView(itemHeight: itemHeight, itemWidth: itemWidth),
+        contentPadding: contentPadding
+    );
+  }
 
 
-  Widget _display({required Widget child, EdgeInsets? contentPadding}) {
-    // Initialize the content margin
-    this.contentPadding = contentPadding;
+  Widget _display({required List<E>? data, required Widget child, EdgeInsets? contentPadding}) {
     // Initialize the widget to display
     Widget widgetToDisplay;
     // If the list of data is not null
     if(data!=null){
       // If the list is not empty
-      if(data!.isNotEmpty){
+      if(data.isNotEmpty){
         widgetToDisplay = child;
       }
       // If the list is empty
@@ -73,13 +95,13 @@ abstract class HelperListGrid {
   Widget _showListView(bool horizontal) {
     ListView listView = ListView.builder(
       shrinkWrap: true,
-      itemCount: data!.length,
+      itemCount: _data!.length,
       scrollDirection: horizontal? Axis.horizontal : Axis.vertical,
       itemBuilder: (context, index){
         return widgetToDisplay(index);
       }
     );
-    return contentPadding==null? listView : _contentPadding(listView);
+    return _contentPadding==null? listView : _displayWithContentPadding(listView);
   }
 
   /// Display a GridView.
@@ -89,6 +111,8 @@ abstract class HelperListGrid {
   }) {
     // Create GridView
     GridView gridView = GridView.builder(
+      shrinkWrap: true,
+      itemCount: _data!.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           crossAxisSpacing: 10.0,
@@ -97,16 +121,16 @@ abstract class HelperListGrid {
       ),
       itemBuilder: (context, index) => widgetToDisplay(index)
     );
-    return contentPadding==null? gridView : _contentPadding(gridView);
+    return _contentPadding==null? gridView : _displayWithContentPadding(gridView);
   }
 
-  /// Widget called in [_showGridView] or [_showListView] where [contentPadding] is not null.
-  Widget _contentPadding(Widget widget) => ListView(
+  /// Widget called in [_showGridView] or [_showListView] where [_contentPadding] is not null.
+  Widget _displayWithContentPadding(Widget widget) => ListView(
     shrinkWrap: true,
     children: [
-      SizedBox(height: contentPadding!.top),
+      SizedBox(height: _contentPadding!.top),
       widget,
-      SizedBox(height: contentPadding!.bottom)
+      SizedBox(height: _contentPadding!.bottom)
     ],
   );
 
@@ -127,12 +151,16 @@ abstract class HelperListGrid {
   Widget _errorWidget() => Center(
     key: const Key("error_widget"),
     child: Column(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.warning),
-        Text(errorString)
+        const Icon(Icons.warning, size: 50, color: Colors.black),
+        const SizedBox(height: 10),
+        Text(errorString, style: const TextStyle(fontSize: 16, color: Colors.black), textAlign: TextAlign.center)
       ],
     ),
   );
 
   Widget widgetToDisplay(int index);
+
+  List<E>? get data => _data;
 }
