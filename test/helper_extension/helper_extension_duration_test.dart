@@ -22,6 +22,7 @@ void main() {
       // Expectations
       expect(const Duration(seconds: 12).toStringSmallFormat(), "12s");
       expect(const Duration(seconds: 25).toStringSmallFormat(), "25s");
+      expect(const Duration(seconds: 280).toStringSmallFormat(), "4m 40s");
     });
   });
 
