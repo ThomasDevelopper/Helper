@@ -13,3 +13,4 @@ export 'src/helper_extension/helper_extension_list.dart';
 export 'src/helper_extension/helper_extension_int.dart';
 export 'src/helper_extension/helper_extension_iterable.dart';
 export 'src/helper_extension/helper_extension_map.dart';
+export 'src/helper_extension/helper_extension_duration.dart';
