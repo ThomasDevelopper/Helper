@@ -50,6 +50,26 @@ abstract class HelperListGrid<E> {
         contentPadding: contentPadding);
   }
 
+  /// Display a list of reorderable elements.
+  ///
+  /// - [onReorder] is the function called when the user reorder a item.
+  /// - [contentPadding] is the padding between the content of the list.
+  /// - if [horizontal] is true, then the direction of the ListView is set to horizontal.
+  Widget displayReorderableList({
+    required List<E>? data,
+    required void Function(int oldIndex, int newIndex) onReorder,
+    EdgeInsets? contentPadding,
+    bool horizontal = false
+  }) {
+    // Initialization
+    _initialize(data, contentPadding);
+    // Return the list
+    return _display(
+      data: data,
+      child: _showReorderableListView(horizontal, onReorder: onReorder),
+      contentPadding: contentPadding);
+  }
+
   /// Display a grid of elements.
   Widget displayGrid({
     required List<E>? data,
@@ -111,6 +131,21 @@ abstract class HelperListGrid<E> {
       }
     );
     return _contentPadding==null? listView : _displayWithContentPadding(listView);
+  }
+
+  /// Display a ReorderableListView.
+  ///
+  /// If [horizontal] is true, then the list will have a horizontal display.
+  Widget _showReorderableListView(bool horizontal, {
+    required void Function(int oldIndex, int newIndex) onReorder
+  }) {
+    ReorderableListView reorderableListView = ReorderableListView.builder(
+      shrinkWrap: true,
+      itemBuilder: (context, index) => widgetToDisplay(index),
+      itemCount: _data!.length,
+      onReorder: onReorder
+    );
+    return _contentPadding==null? reorderableListView : _displayWithContentPadding(reorderableListView);
   }
 
   /// Display a GridView.
