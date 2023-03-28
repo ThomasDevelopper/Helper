@@ -55,6 +55,9 @@ abstract class HelperListGrid<E> {
     required List<E>? data,
     double itemHeight = 2,
     double itemWidth = 1,
+    int crossAxisCount = 2,
+    double crossAxisSpacing = 10.0,
+    double mainAxisSpacing = 10.0,
     EdgeInsets? contentPadding,
   }) {
     // Initialization
@@ -62,7 +65,13 @@ abstract class HelperListGrid<E> {
     // Return the grid
     return _display(
         data: data,
-        child: _showGridView(itemHeight: itemHeight, itemWidth: itemWidth),
+        child: _showGridView(
+          itemHeight: itemHeight,
+          itemWidth: itemWidth,
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: crossAxisSpacing,
+          mainAxisSpacing: mainAxisSpacing
+        ),
         contentPadding: contentPadding
     );
   }
@@ -107,16 +116,19 @@ abstract class HelperListGrid<E> {
   /// Display a GridView.
   Widget _showGridView({
     required double itemHeight,
-    required double itemWidth
+    required double itemWidth,
+    required int crossAxisCount,
+    required double crossAxisSpacing,
+    required double mainAxisSpacing
   }) {
     // Create GridView
     GridView gridView = GridView.builder(
       shrinkWrap: true,
       itemCount: _data!.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: crossAxisSpacing,
+          mainAxisSpacing: mainAxisSpacing,
           childAspectRatio: (itemWidth/itemHeight)
       ),
       itemBuilder: (context, index) => widgetToDisplay(index)
