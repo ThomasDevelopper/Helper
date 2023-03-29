@@ -17,12 +17,15 @@ abstract class HelperListGrid<E> {
   String errorString;
   /// Margin of the content. (only marginTop / marginBottom)
   EdgeInsets? _contentPadding;
+  /// Boolean to know if the user can scroll
+  bool canScroll;
 
   HelperListGrid({
     required this.context,
     required this.emptyString,
     required this.emptyIcon,
-    required this.errorString
+    required this.errorString,
+    this.canScroll = true
   });
 
   /// Function to initialize [_data] with [data]
@@ -127,6 +130,7 @@ abstract class HelperListGrid<E> {
   Widget _showListView(bool horizontal) {
     ListView listView = ListView.builder(
       shrinkWrap: true,
+      physics: canScroll? null : const NeverScrollableScrollPhysics(),
       itemCount: _data!.length,
       scrollDirection: horizontal? Axis.horizontal : Axis.vertical,
       itemBuilder: (context, index){
@@ -144,6 +148,7 @@ abstract class HelperListGrid<E> {
   }) {
     ReorderableListView reorderableListView = ReorderableListView.builder(
       shrinkWrap: true,
+      physics: canScroll? null : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => widgetToDisplay(index),
       itemCount: _data!.length,
       onReorder: onReorder
@@ -162,6 +167,7 @@ abstract class HelperListGrid<E> {
     // Create GridView
     GridView gridView = GridView.builder(
       shrinkWrap: true,
+      physics: canScroll? null : const NeverScrollableScrollPhysics(),
       itemCount: _data!.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
