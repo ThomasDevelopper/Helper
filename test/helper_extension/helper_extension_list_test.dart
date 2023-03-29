@@ -120,7 +120,6 @@ void main()
   });
 
 
-
   test("Test substitute m1 by m1New", () {
     // Create Models
     ModelTest m1 = ModelTest(1);
@@ -140,5 +139,17 @@ void main()
     // Expect
     expect(list.first, m1New);
     expect(list.last, m4New);
+  });
+
+  test("Test replaceSingleItemAt function", () {
+    // Initialize a list
+    List<int> list = [4, 7, 29, 12];
+    // Replace item in the list
+    list.replaceSingleItemAt(oldIndex: 3, newIndex: 1);
+    // Expect
+    expect(list[0], 4);
+    expect(list[1], 12);
+    expect(list[2], 7);
+    expect(list[3], 29);
   });
 }

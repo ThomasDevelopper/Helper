@@ -96,4 +96,18 @@ extension HelperExtensionList<E> on List<E> {
       }
     }
   }
+
+  /// Function to remove the element at [oldIndex]
+  /// and put it at [newIndex].
+  void replaceSingleItemAt({
+    required int oldIndex,
+    required int newIndex
+  }) {
+    // Get the element at old index
+    E element = elementAt(oldIndex);
+    // Remove the item at the index
+    removeAt(oldIndex);
+    // Add the element at the new index
+    insert(newIndex, element);
+  }
 }
