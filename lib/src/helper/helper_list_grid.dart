@@ -36,6 +36,7 @@ abstract class HelperListGrid<E> {
   ///
   /// - [contentPadding] is the padding between the content of the list.
   /// - if [horizontal] is true, then the direction of the ListView is set to horizontal.
+  @protected
   Widget displayList({
     required List<E>? data,
     EdgeInsets? contentPadding,
@@ -55,6 +56,7 @@ abstract class HelperListGrid<E> {
   /// - [onReorder] is the function called when the user reorder a item.
   /// - [contentPadding] is the padding between the content of the list.
   /// - if [horizontal] is true, then the direction of the ListView is set to horizontal.
+  @protected
   Widget displayReorderableList({
     required List<E>? data,
     required void Function(int oldIndex, int newIndex) onReorder,
@@ -71,6 +73,7 @@ abstract class HelperListGrid<E> {
   }
 
   /// Display a grid of elements.
+  @protected
   Widget displayGrid({
     required List<E>? data,
     double itemHeight = 2,
@@ -207,6 +210,7 @@ abstract class HelperListGrid<E> {
     ),
   );
 
+  @protected
   Widget widgetToDisplay(int index);
 
   List<E>? get data => _data;
