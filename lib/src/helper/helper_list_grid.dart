@@ -7,26 +7,49 @@ abstract class HelperListGrid<E> {
 
   /// Context
   BuildContext context;
+
   /// List of data to show in the list/grid.
   List<E>? _data;
+
   /// String show when [data] is empty.
   String emptyString;
+
   /// IconData show when [data] is empty.
   IconData emptyIcon;
+
   /// String show when [data] is null.
   String errorString;
+
   /// Margin of the content. (only marginTop / marginBottom)
   EdgeInsets? _contentPadding;
+
   /// Boolean to know if the user can scroll
   bool canScroll;
+
+  /// Static ScrollPhysics used if [canScroll] is true.
+  static ScrollPhysics scrollPhysicsStatic = const ScrollPhysics();
+
+  /// Current ScrollPhysics
+  /// this physics is set if [scrollPhysics] is different than [scrollPhysicsStatic]
+  /// and if [canScroll] is true.
+  ScrollPhysics? scrollPhysics;
 
   HelperListGrid({
     required this.context,
     required this.emptyString,
     required this.emptyIcon,
     required this.errorString,
-    this.canScroll = true
+    this.canScroll = true,
+    this.scrollPhysics
   });
+
+  /// Function to initialize [scrollPhysicsStatic] with [scrollPhysics].
+  static void initializeParams({
+    required ScrollPhysics scrollPhysics
+  }) {
+    // Set scrollPhysicsStatic
+    scrollPhysicsStatic = scrollPhysics;
+  }
 
   /// Function to initialize [_data] with [data]
   /// and [_contentPadding] with [contentPadding].
@@ -130,7 +153,7 @@ abstract class HelperListGrid<E> {
   Widget _showListView(bool horizontal) {
     ListView listView = ListView.builder(
       shrinkWrap: true,
-      physics: canScroll? null : const NeverScrollableScrollPhysics(),
+      physics: canScroll? scrollPhysics ?? scrollPhysicsStatic : const NeverScrollableScrollPhysics(),
       itemCount: _data!.length,
       scrollDirection: horizontal? Axis.horizontal : Axis.vertical,
       itemBuilder: (context, index){
@@ -148,7 +171,7 @@ abstract class HelperListGrid<E> {
   }) {
     ReorderableListView reorderableListView = ReorderableListView.builder(
       shrinkWrap: true,
-      physics: canScroll? null : const NeverScrollableScrollPhysics(),
+      physics: canScroll? scrollPhysics ?? scrollPhysicsStatic : const NeverScrollableScrollPhysics(),
       itemBuilder: (context, index) => widgetToDisplay(index),
       itemCount: _data!.length,
       onReorder: onReorder
@@ -167,7 +190,7 @@ abstract class HelperListGrid<E> {
     // Create GridView
     GridView gridView = GridView.builder(
       shrinkWrap: true,
-      physics: canScroll? null : const NeverScrollableScrollPhysics(),
+      physics: canScroll? scrollPhysics ?? scrollPhysicsStatic : const NeverScrollableScrollPhysics(),
       itemCount: _data!.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
