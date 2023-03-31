@@ -205,6 +205,7 @@ abstract class HelperListGrid<E> {
 
   /// Widget called in [_showGridView] or [_showListView] where [_contentPadding] is not null.
   Widget _displayWithContentPadding(Widget widget) => ListView(
+    physics: canScroll? scrollPhysics ?? scrollPhysicsStatic : const NeverScrollableScrollPhysics(),
     shrinkWrap: true,
     children: [
       SizedBox(height: _contentPadding!.top),
