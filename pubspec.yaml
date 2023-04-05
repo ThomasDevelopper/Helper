@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   in_app_review: ^2.0.6
-  intl: ^0.17.0
+  intl: any
   mockito: ^5.3.2
   shared_preferences: ^2.0.18
 
