@@ -12,6 +12,8 @@ void main()
     expect(helperDateTime.dateTimeToString(), "2023-04-19 10:05:35");
   });
 
+
+
   test("Test add a duration", () {
     // Create an instance
     final helperDateTime = HelperDateTime(dt);
@@ -29,6 +31,8 @@ void main()
     expect(helperDateTime.addDuration(seconds: 20), dt20SecAfter);
   });
 
+
+
   test("Test remove a duration", () {
     // Create an instance
     final helperDateTime = HelperDateTime(dt);
@@ -45,4 +49,93 @@ void main()
     DateTime dt30SecBefore = DateTime(dt.year, dt.month, dt.day, dt.hour, dt.minute, dt.second-30);
     expect(helperDateTime.removeDuration(seconds: 30), dt30SecBefore);
   });
+
+
+
+
+  group("Test toStringSmallFormat", () {
+    // Optimize the function
+    String toStringForTest(HelperDateTime helperDateTime) => helperDateTime.toStringSmallFormatTesting(
+        now: DateTime(2023, 04, 06, 14, 20, 25),
+        yearString: (nbYear) => nbYear>1? "years" : "year",
+        monthString: (nbMonth) => nbMonth>1? "months" : "month",
+        dayString: (nbDay) => nbDay>1? "days" : "day",
+        hourString: (nbHour) => nbHour>1? "hours" : "hour",
+        minuteString: (nbMinute) => nbMinute>1? "minutes" : "minute",
+        nowString: "now"
+    );
+
+    test("Test display year", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2021));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "2 years");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2022));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "1 year");
+    });
+
+    test("Test display month", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2023, 01));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "3 months");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 03));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "1 month");
+    });
+
+    test("Test display day", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2023, 04, 01));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "5 days");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 04, 05));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "1 day");
+    });
+
+    test("Test display hour", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 10));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "4 hours");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 13));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "1 hour");
+    });
+
+    test("Test display minute", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 14, 10));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "10 minutes");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 14, 19));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "1 minute");
+    });
+
+    test("Test display now", () {
+      // Create an instance
+      HelperDateTime helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 14, 20, 20));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "now");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 14, 20));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "now");
+      // Create an instance
+      helperDateTime = HelperDateTime(DateTime(2023, 04, 06, 14, 20, 25));
+      // Expectation
+      expect(toStringForTest(helperDateTime), "now");
+    });
+  });
+
+
+  
 }
