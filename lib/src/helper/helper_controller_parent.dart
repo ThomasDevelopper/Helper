@@ -13,16 +13,6 @@ abstract class HelperControllerParent
   /// Check if the code is run from test (static way).
   static final bool _inTestingStatic = Platform.environment.containsKey('FLUTTER_TEST');
 
-  /// Function to do a setState on a waiting boolean.
-  Function(bool)? setStateWaiting;
-
-  /// Function to do a setState on a error boolean.
-  Function(bool)? setStateError;
-
-  HelperControllerParent({
-    this.setStateWaiting,
-    this.setStateError
-  });
 
   /// Function to create a future that will return [intReturn].
   ///

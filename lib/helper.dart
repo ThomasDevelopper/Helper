@@ -8,6 +8,7 @@ export 'src/helper/helper_modal_bottom_sheet.dart';
 export 'src/helper/helper_try_catch.dart';
 export 'src/helper/helper_review.dart';
 export 'src/helper/helper_rich_text.dart';
+export 'src/helper/helper_controller_stateful.dart';
 
 export 'src/helper_extension/helper_extension_string.dart';
 export 'src/helper_extension/helper_extension_list.dart';
