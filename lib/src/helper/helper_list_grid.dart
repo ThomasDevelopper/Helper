@@ -51,13 +51,6 @@ abstract class HelperListGrid<E> {
     scrollPhysicsStatic = scrollPhysics;
   }
 
-  /// Function to initialize [_data] with [data]
-  /// and [_contentPadding] with [contentPadding].
-  void _initialize(List<E>? data, EdgeInsets? contentPadding) {
-    this._data = data;
-    this._contentPadding = contentPadding;
-  }
-
   /// Display a list of elements.
   ///
   /// - [contentPadding] is the padding between the content of the list.
@@ -68,12 +61,10 @@ abstract class HelperListGrid<E> {
     EdgeInsets? contentPadding,
     bool horizontal = false
   }) {
-    // Initialization
-    _initialize(data, contentPadding);
     // Return the list
     return _display(
         data: data,
-        child: _showListView(horizontal),
+        child: () => _showListView(horizontal),
         contentPadding: contentPadding);
   }
 
@@ -89,12 +80,10 @@ abstract class HelperListGrid<E> {
     EdgeInsets? contentPadding,
     bool horizontal = false
   }) {
-    // Initialization
-    _initialize(data, contentPadding);
     // Return the list
     return _display(
       data: data,
-      child: _showReorderableListView(horizontal, onReorder: onReorder),
+      child: () => _showReorderableListView(horizontal, onReorder: onReorder),
       contentPadding: contentPadding);
   }
 
@@ -109,12 +98,10 @@ abstract class HelperListGrid<E> {
     double mainAxisSpacing = 10.0,
     EdgeInsets? contentPadding,
   }) {
-    // Initialization
-    _initialize(data, contentPadding);
     // Return the grid
     return _display(
         data: data,
-        child: _showGridView(
+        child: () => _showGridView(
           itemHeight: itemHeight,
           itemWidth: itemWidth,
           crossAxisCount: crossAxisCount,
@@ -126,14 +113,18 @@ abstract class HelperListGrid<E> {
   }
 
 
-  Widget _display({required List<E>? data, required Widget child, EdgeInsets? contentPadding}) {
+  Widget _display({required List<E>? data, required Widget Function() child, EdgeInsets? contentPadding}) {
+    // Set data
+    this._data = data;
+    // Set contentPadding
+    this._contentPadding = contentPadding;
     // Initialize the widget to display
     Widget widgetToDisplay;
     // If the list of data is not null
     if(data!=null){
       // If the list is not empty
       if(data.isNotEmpty){
-        widgetToDisplay = child;
+        widgetToDisplay = child();
       }
       // If the list is empty
       else{
@@ -233,9 +224,9 @@ abstract class HelperListGrid<E> {
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Icon(Icons.warning, size: 50, color: Colors.black),
+        const Icon(Icons.warning, size: 50, color: Colors.grey),
         const SizedBox(height: 10),
-        Text(errorString, style: const TextStyle(fontSize: 16, color: Colors.black), textAlign: TextAlign.center)
+        Text(errorString, style: const TextStyle(fontSize: 16, color: Colors.grey), textAlign: TextAlign.center)
       ],
     ),
   );
