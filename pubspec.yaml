@@ -12,7 +12,7 @@ dependencies:
   in_app_review: ^2.0.6
   intl: any
   mockito: ^5.3.2
-  shared_preferences: ^2.0.18
+  shared_preferences: any
 
 dev_dependencies:
   flutter_test:
