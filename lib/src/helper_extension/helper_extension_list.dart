@@ -110,4 +110,34 @@ extension HelperExtensionList<E> on List<E> {
     // Add the element at the new index
     insert(newIndex, element);
   }
+
+  /// Function to convert a list of [String] into a list of [int].
+  List<int> convertInt() {
+    if(E!=String) throw Exception("Must be a list of String");
+    // Initialize a new list
+    List<int> newList = [];
+    // For each item in the list
+    for(var item in this) {
+      // Convert the item in int
+      // and put it into newList
+      newList.add(int.parse(item as String));
+    }
+    // Return the newList
+    return newList;
+  }
+
+  /// Function to convert a list of [int] into a list of [String].
+  List<String> convertString() {
+    if(E!=int) throw Exception("Must be a list of int");
+    // Initialize a new list
+    List<String> newList = [];
+    // For each item in the list
+    for(var item in this) {
+      // Convert the item in String
+      // and put it into newList
+      newList.add("$item");
+    }
+    // Return the newList
+    return newList;
+  }
 }

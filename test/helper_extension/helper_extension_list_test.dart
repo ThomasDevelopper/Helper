@@ -141,6 +141,7 @@ void main()
     expect(list.last, m4New);
   });
 
+
   test("Test replaceSingleItemAt function", () {
     // Initialize a list
     List<int> list = [4, 7, 29, 12];
@@ -151,5 +152,31 @@ void main()
     expect(list[1], 12);
     expect(list[2], 7);
     expect(list[3], 29);
+  });
+
+
+  test("Test convert List of String into List of int", () {
+    // Initialize a list
+    List<String> list = ["4", "5", "9"];
+    // Get the new list after the conversion in int
+    List<int> newList = list.convertInt();
+    // Expectations
+    expect(newList.length, 3);
+    expect(newList[0], 4);
+    expect(newList[1], 5);
+    expect(newList[2], 9);
+  });
+
+
+  test("Test convert List of int into List of String", () {
+    // Initialize a list
+    List<int> list = [10, 13, 14];
+    // Get the new list after the conversion in String
+    List<String> newList = list.convertString();
+    // Expectations
+    expect(newList.length, 3);
+    expect(newList[0], "10");
+    expect(newList[1], "13");
+    expect(newList[2], "14");
   });
 }
